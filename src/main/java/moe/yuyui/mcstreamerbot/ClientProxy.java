@@ -1,4 +1,4 @@
-package com.myname.mymodid;
+package moe.yuyui.mcstreamerbot;
 
 public class ClientProxy extends CommonProxy {
 

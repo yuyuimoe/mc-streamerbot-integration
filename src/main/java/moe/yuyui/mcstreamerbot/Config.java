@@ -1,4 +1,4 @@
-package com.myname.mymodid;
+package moe.yuyui.mcstreamerbot;
 
 import java.io.File;
 

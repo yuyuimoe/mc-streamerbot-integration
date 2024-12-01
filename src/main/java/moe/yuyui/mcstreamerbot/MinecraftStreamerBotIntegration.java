@@ -1,4 +1,4 @@
-package com.myname.mymodid;
+package moe.yuyui.mcstreamerbot;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,14 +9,21 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import moe.yuyui.mcstreamerbot.common.EventListener;
 
-@Mod(modid = MyMod.MODID, version = Tags.VERSION, name = "MyMod", acceptedMinecraftVersions = "[1.7.10]")
-public class MyMod {
+@Mod(
+    modid = MinecraftStreamerBotIntegration.MODID,
+    version = Tags.VERSION,
+    name = "MyMod",
+    acceptedMinecraftVersions = "[1.7.10]")
+public class MinecraftStreamerBotIntegration {
 
-    public static final String MODID = "mymodid";
+    public static final String MODID = "mcstreamerbot";
     public static final Logger LOG = LogManager.getLogger(MODID);
 
-    @SidedProxy(clientSide = "com.myname.mymodid.ClientProxy", serverSide = "com.myname.mymodid.CommonProxy")
+    public static EventListener eventListener;
+
+    @SidedProxy(clientSide = "moe.yuyui.mcstreamerbot.ClientProxy", serverSide = "moe.yuyui.mcstreamerbot.CommonProxy")
     public static CommonProxy proxy;
 
     @Mod.EventHandler
