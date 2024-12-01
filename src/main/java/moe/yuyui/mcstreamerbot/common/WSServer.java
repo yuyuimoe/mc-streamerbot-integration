@@ -36,8 +36,10 @@ public class WSServer extends WebSocketServer {
 
     public WSServer(InetSocketAddress address, String authToken) throws NoSuchAlgorithmException {
         super(address);
-        this._authToken = MessageDigest.getInstance("SHA-256")
-            .digest(authToken.getBytes(StandardCharsets.UTF_8));
+        if (!authToken.isEmpty()) {
+            this._authToken = MessageDigest.getInstance("SHA-256")
+                .digest(authToken.getBytes(StandardCharsets.UTF_8));
+        }
     }
 
     @Override

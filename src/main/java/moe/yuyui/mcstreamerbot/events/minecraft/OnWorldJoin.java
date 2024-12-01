@@ -1,11 +1,13 @@
 package moe.yuyui.mcstreamerbot.events.minecraft;
 
 import java.net.InetSocketAddress;
+import java.security.NoSuchAlgorithmException;
 
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import moe.yuyui.mcstreamerbot.Config;
 import moe.yuyui.mcstreamerbot.MinecraftStreamerBotIntegration;
 import moe.yuyui.mcstreamerbot.common.EventListener;
 import moe.yuyui.mcstreamerbot.common.WSServer;
@@ -21,8 +23,12 @@ public class OnWorldJoin {
                     return;
                 }
             }
-            MinecraftStreamerBotIntegration.eventListener = new EventListener(
-                new WSServer(new InetSocketAddress("127.0.0.1", 8080)));
+            try {
+                MinecraftStreamerBotIntegration.eventListener = new EventListener(
+                    new WSServer(new InetSocketAddress(Config.ipAddress, Config.portNumber), Config.authToken));
+            } catch (NoSuchAlgorithmException e) {
+                MinecraftStreamerBotIntegration.LOG.error("Your computer does not support SHA-256 hashing");
+            }
         }
     }
 }
