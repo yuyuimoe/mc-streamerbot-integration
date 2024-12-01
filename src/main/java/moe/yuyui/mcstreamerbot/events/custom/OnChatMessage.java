@@ -9,12 +9,14 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 
+import moe.yuyui.mcstreamerbot.Config;
 import moe.yuyui.mcstreamerbot.common.beans.MessageBean;
 import moe.yuyui.mcstreamerbot.common.beans.UserBean;
 
 public final class OnChatMessage {
 
-    private static final String _messageFormat = "<%s> %s%s[%s]%s: %s";
+    private static final String _messageFormat = "%s%s[%s]%s: %s";
+    private static final String _timestampedMessageFormat = "<%s>";
 
     private static String buildMessage(List<MessageBean> messageParts) {
         StringBuilder finalMessage = new StringBuilder();
@@ -58,19 +60,26 @@ public final class OnChatMessage {
             return;
         }
         final String message = buildMessage(messageParts);
-        final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("hh:mm:ss a");
+        final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("hh:mm a");
         final String formattedTime = Instant.ofEpochSecond(timestamp)
             .atZone(ZoneId.systemDefault())
             .format(dateFormatter);
-        ChatComponentText chatComponentText = new ChatComponentText(
+        StringBuilder chatMessage = new StringBuilder();
+
+        if (Config.addTimestamp) {
+            chatMessage.append(String.format(_timestampedMessageFormat, formattedTime));
+        }
+
+        chatMessage.append(
             String.format(
                 _messageFormat,
-                formattedTime,
                 getUserColor(user),
                 getUserBadge(user),
                 user.getName(),
                 EnumChatFormatting.RESET.toString(),
                 message.replace('§', ' ')));
+
+        ChatComponentText chatComponentText = new ChatComponentText(chatMessage.toString());
         Minecraft.getMinecraft().ingameGUI.getChatGUI()
             .printChatMessage(chatComponentText);
     }

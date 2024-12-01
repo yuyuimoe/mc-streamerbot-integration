@@ -1,10 +1,15 @@
 package moe.yuyui.mcstreamerbot.gui;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.config.ConfigElement;
+import net.minecraftforge.common.config.Configuration;
 
 import cpw.mods.fml.client.config.GuiConfig;
+import cpw.mods.fml.client.config.IConfigElement;
 import moe.yuyui.mcstreamerbot.Config;
 import moe.yuyui.mcstreamerbot.MCStreamerBot;
 
@@ -13,12 +18,11 @@ public class MCStreamerBotGuiConfig extends GuiConfig {
     public MCStreamerBotGuiConfig(GuiScreen parent) {
         super(
             parent,
-            new ConfigElement<>(Config.configuration.getCategory(Config.CATEGORY_WEBSOCKET)).getChildElements(),
+            getConfigElements(),
             MCStreamerBot.MODID,
-            true,
             false,
-            "Configure the Websocket.");
-        titleLine2 = "Make sure you know what you're doing ;)";
+            false,
+            "Configure the Streamer.bot integration.");
     }
 
     @Override
@@ -34,5 +38,13 @@ public class MCStreamerBotGuiConfig extends GuiConfig {
     @Override
     protected void actionPerformed(GuiButton button) {
         super.actionPerformed(button);
+    }
+
+    private static List<IConfigElement> getConfigElements() {
+        Configuration config = Config.configuration;
+        return config.getCategoryNames()
+            .stream()
+            .map(name -> new ConfigElement<>(config.getCategory(name)))
+            .collect(Collectors.toList());
     }
 }
