@@ -1,5 +1,7 @@
 package moe.yuyui.mcstreamerbot.common;
 
+import moe.yuyui.mcstreamerbot.MCStreamerBot;
+
 public class EventListener extends Thread {
 
     private final WSServer _websocketServer;
@@ -12,10 +14,10 @@ public class EventListener extends Thread {
     @Override
     public void run() {
         try {
+            MCStreamerBot.LOG.info("Event Listener starting...");
             this._websocketServer.run();
-            System.out.println("Event Listener started");
         } catch (NullPointerException e) {
-            System.out.println("Event Listener stopped. Websocket has failed.");
+            MCStreamerBot.LOG.error("Event Listener has failed. Websocket issue.", e);
         }
     }
 

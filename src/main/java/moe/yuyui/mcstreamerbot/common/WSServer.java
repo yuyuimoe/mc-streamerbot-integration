@@ -21,6 +21,7 @@ import org.java_websocket.server.WebSocketServer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import moe.yuyui.mcstreamerbot.MCStreamerBot;
 import moe.yuyui.mcstreamerbot.common.beans.MessagePayloadBean;
 import moe.yuyui.mcstreamerbot.common.enums.MessageType;
 import moe.yuyui.mcstreamerbot.events.custom.OnChatMessage;
@@ -45,17 +46,18 @@ public class WSServer extends WebSocketServer {
     @Override
     public void onOpen(WebSocket conn, ClientHandshake handshake) {
         if (_authToken != null) {
+            MCStreamerBot.LOG.warn("Connection failed authentication.");
             conn.send("bad girl");
             return;
         }
         _authClients.add(conn);
-        System.out.println("New connection");
+        MCStreamerBot.LOG.info("New client connection established.");
     }
 
     @Override
     public void onClose(WebSocket conn, int code, String reason, boolean remote) {
         _authClients.remove(conn);
-        System.out.println("Connection closed");
+        MCStreamerBot.LOG.info("Client disconnected.");
     }
 
     @Override
@@ -90,7 +92,7 @@ public class WSServer extends WebSocketServer {
             }
             return builder.toString();
         } catch (ZipException e) {
-            System.out.println("Message is not valid");
+            MCStreamerBot.LOG.warn("Last message received was not valid.");
         } catch (IOException ignored) {}
         return null;
 
@@ -116,12 +118,15 @@ public class WSServer extends WebSocketServer {
                 break;
             }
             case COMMAND: {
+                MCStreamerBot.LOG.debug("Message COMMAND received");
                 break;
             }
             case LISTEN: {
+                MCStreamerBot.LOG.debug("Message LISTEN received");
                 break;
             }
             case IGNORE: {
+                MCStreamerBot.LOG.debug("Message IGNORE received");
                 break;
             }
         }
@@ -129,12 +134,17 @@ public class WSServer extends WebSocketServer {
 
     @Override
     public void onError(WebSocket conn, Exception ex) {
-        ex.printStackTrace();
+        MCStreamerBot.LOG.fatal("Websocket fatal error.", ex);
         conn.close();
     }
 
     @Override
     public void onStart() {
-        System.out.println("Server started");
+        MCStreamerBot.LOG.info(
+            "Server started at ws://{}:{}",
+            this.getAddress()
+                .getHostString(),
+            this.getAddress()
+                .getPort());
     }
 }
