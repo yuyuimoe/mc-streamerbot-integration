@@ -15,7 +15,7 @@ public class CommonProxy {
     // preInit "Run before anything else. Read your config, create blocks, items, etc, and register them with the
     // GameRegistry." (Remove if not needed)
     public void preInit(FMLPreInitializationEvent event) {
-        Config.configuration = new Configuration(event.getSuggestedConfigurationFile());
+        Config.configuration = new Configuration(event.getSuggestedConfigurationFile(), Tags.CONFIG_VERSION);
         Config.synchronizeConfiguration();
 
         MCStreamerBot.LOG.info("MCStreamerBot is meowing in version " + Tags.VERSION);

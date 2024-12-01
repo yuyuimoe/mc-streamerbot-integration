@@ -13,7 +13,7 @@ import moe.yuyui.mcstreamerbot.common.EventListener;
 
 @Mod(
     modid = MCStreamerBot.MODID,
-    version = "1.0.1-" + Tags.VERSION,
+    version = Tags.VERSION,
     name = "MCStreamerBot",
     acceptedMinecraftVersions = "[1.7.10]",
     guiFactory = "moe.yuyui." + MCStreamerBot.MODID + ".gui.MCStreamerBotGuiFactory")
