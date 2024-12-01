@@ -8,7 +8,7 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import moe.yuyui.mcstreamerbot.Config;
-import moe.yuyui.mcstreamerbot.MinecraftStreamerBotIntegration;
+import moe.yuyui.mcstreamerbot.MCStreamerBot;
 import moe.yuyui.mcstreamerbot.common.EventListener;
 import moe.yuyui.mcstreamerbot.common.WSServer;
 
@@ -18,16 +18,16 @@ public class OnWorldJoin {
     public void onEntityJoinWorld(EntityJoinWorldEvent event) {
         if (event.entity == Minecraft.getMinecraft().thePlayer && Minecraft.getMinecraft()
             .isIntegratedServerRunning() && event.world.isRemote) {
-            if (MinecraftStreamerBotIntegration.eventListener != null) {
-                if (MinecraftStreamerBotIntegration.eventListener.isAlive()) {
+            if (MCStreamerBot.eventListener != null) {
+                if (MCStreamerBot.eventListener.isAlive()) {
                     return;
                 }
             }
             try {
-                MinecraftStreamerBotIntegration.eventListener = new EventListener(
+                MCStreamerBot.eventListener = new EventListener(
                     new WSServer(new InetSocketAddress(Config.ipAddress, Config.portNumber), Config.authToken));
             } catch (NoSuchAlgorithmException e) {
-                MinecraftStreamerBotIntegration.LOG.error("Your computer does not support SHA-256 hashing");
+                MCStreamerBot.LOG.error("Your computer does not support SHA-256 hashing");
             }
         }
     }

@@ -1,6 +1,7 @@
 package moe.yuyui.mcstreamerbot;
 
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -14,16 +15,17 @@ public class CommonProxy {
     // preInit "Run before anything else. Read your config, create blocks, items, etc, and register them with the
     // GameRegistry." (Remove if not needed)
     public void preInit(FMLPreInitializationEvent event) {
-        Config.synchronizeConfiguration(event.getSuggestedConfigurationFile());
+        Config.configuration = new Configuration(event.getSuggestedConfigurationFile());
+        Config.synchronizeConfiguration();
 
-        MinecraftStreamerBotIntegration.LOG.info("MCStreamerBot is meowing in version " + Tags.VERSION);
+        MCStreamerBot.LOG.info("MCStreamerBot is meowing in version " + Tags.VERSION);
     }
 
     // load "Do your mod setup. Build whatever data structures you care about. Register recipes." (Remove if not needed)
     public void init(FMLInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(new OnWorldJoin());
         MinecraftForge.EVENT_BUS.register(new OnWorldLeave());
-        MinecraftStreamerBotIntegration.LOG.info("Loaded MCStreamerBot");
+        MCStreamerBot.LOG.info("Loaded MCStreamerBot");
     }
 
     // postInit "Handle interaction with other mods, complete your setup based on this." (Remove if not needed)

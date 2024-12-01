@@ -1,25 +1,26 @@
 package moe.yuyui.mcstreamerbot;
 
-import java.io.File;
-
 import net.minecraftforge.common.config.Configuration;
 
 public class Config {
 
-    private static final String CATEGORY_WEBSOCKET = "websocket";
+    public static final String CATEGORY_WEBSOCKET = "websocket";
     public static int portNumber = 8069;
     public static String ipAddress = "127.0.0.1";
     public static String authToken = "";
+    public static Configuration configuration;
 
-    public static void synchronizeConfiguration(File configFile) {
-        Configuration configuration = new Configuration(configFile);
-        configuration.addCustomCategoryComment("General", "General configuration of the bot");
+    public static void synchronizeConfiguration() {
+        configuration.addCustomCategoryComment(CATEGORY_WEBSOCKET, "Configuration for the websocket");
         portNumber = configuration
-            .getInt("port", CATEGORY_WEBSOCKET, portNumber, 1024, 65535, "The port that the websocket will listen on");
+            .getInt("Port", CATEGORY_WEBSOCKET, portNumber, 1024, 65535, "The Port that the websocket will listen on");
         ipAddress = configuration
-            .getString("ip", CATEGORY_WEBSOCKET, ipAddress, "The ip that the websocket will listen on");
-        authToken = configuration
-            .getString("authToken", CATEGORY_WEBSOCKET, authToken, "The authentication token for the websocket");
+            .getString("IP Address", CATEGORY_WEBSOCKET, ipAddress, "The IP Address that the websocket will listen on");
+        authToken = configuration.getString(
+            "Authentication Token",
+            CATEGORY_WEBSOCKET,
+            authToken,
+            "The authentication token for the websocket. Leave empty to disable authentication.");
 
         if (configuration.hasChanged()) {
             configuration.save();

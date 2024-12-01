@@ -12,15 +12,15 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import moe.yuyui.mcstreamerbot.common.EventListener;
 
 @Mod(
-    modid = MinecraftStreamerBotIntegration.MODID,
-    version = Tags.VERSION,
-    name = "MyMod",
-    acceptedMinecraftVersions = "[1.7.10]")
-public class MinecraftStreamerBotIntegration {
+    modid = MCStreamerBot.MODID,
+    version = "1.0.1-" + Tags.VERSION,
+    name = "MCStreamerBot",
+    acceptedMinecraftVersions = "[1.7.10]",
+    guiFactory = "moe.yuyui." + MCStreamerBot.MODID + ".gui.MCStreamerBotGuiFactory")
+public class MCStreamerBot {
 
     public static final String MODID = "mcstreamerbot";
     public static final Logger LOG = LogManager.getLogger(MODID);
-
     public static EventListener eventListener;
 
     @SidedProxy(clientSide = "moe.yuyui.mcstreamerbot.ClientProxy", serverSide = "moe.yuyui.mcstreamerbot.CommonProxy")
