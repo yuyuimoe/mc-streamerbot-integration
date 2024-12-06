@@ -11,6 +11,8 @@ import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IChatComponent;
 
+import com.vdurmont.emoji.EmojiParser;
+
 import moe.yuyui.mcstreamerbot.Config;
 import moe.yuyui.mcstreamerbot.common.beans.MessageBean;
 import moe.yuyui.mcstreamerbot.common.beans.UserBean;
@@ -41,8 +43,9 @@ public class ChatMessageFactory {
             }
             finalMessage.append(Normalizer.normalize(messagePart.getText(), Normalizer.Form.NFKC));
         }
-        return new ChatComponentText(finalMessage.toString())
-            .setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RESET));
+        return new ChatComponentText(
+            EmojiParser.parseToAliases(finalMessage.toString(), EmojiParser.FitzpatrickAction.IGNORE))
+                .setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RESET));
     }
 
     private IChatComponent buildTimestamp() {

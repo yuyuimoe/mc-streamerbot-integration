@@ -36,4 +36,5 @@
 dependencies {
     runtimeOnlyNonPublishable("com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH:dev")
     shadowImplementation("org.java-websocket:Java-WebSocket:1.5.7")
+    shadowImplementation("com.vdurmont:emoji-java:5.1.1");
 }
