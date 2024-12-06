@@ -1,5 +1,7 @@
 package moe.yuyui.mcstreamerbot.common.message;
 
+import java.text.Normalizer;
+
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
@@ -30,19 +32,20 @@ public class UserFactory {
 
     private String getUserBadge() {
         if (_userBean.getIsBroadcaster()) {
-            return "\u2734"; // ✴
+            return "✴";
         }
         if (_userBean.getIsModerator()) {
-            return "\u265F"; // ♟
+            return "♟";
         }
         if (_userBean.getIsMember()) {
-            return "\u2764"; // ❤
+            return "❤";
         }
         return "";
     }
 
     public IChatComponent buildUserPrefix() {
-        return new ChatComponentText(String.format("%s[%s] ", getUserBadge(), _userBean.getName()))
-            .setChatStyle(getUserColor());
+        return new ChatComponentText(
+            String.format("%s[%s] ", getUserBadge(), Normalizer.normalize(_userBean.getName(), Normalizer.Form.NFKC)))
+                .setChatStyle(getUserColor());
     }
 }

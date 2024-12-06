@@ -1,5 +1,6 @@
 package moe.yuyui.mcstreamerbot.common.message;
 
+import java.text.Normalizer;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -38,7 +39,7 @@ public class ChatMessageFactory {
                     messagePart.getEmoji()
                         .getEndIndex());
             }
-            finalMessage.append(messagePart.getText());
+            finalMessage.append(Normalizer.normalize(messagePart.getText(), Normalizer.Form.NFKC));
         }
         return new ChatComponentText(finalMessage.toString())
             .setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RESET));
