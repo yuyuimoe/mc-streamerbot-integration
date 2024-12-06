@@ -6,9 +6,10 @@
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/B0B216W81V)
 
-This mods allows you to integrate Streamer.bot into minecraft.
+This mods allows you to integrate Streamer.bot into minecraft. **CLIENT-SIDE ONLY**
 
 ⚠️ Currently it only supports **Youtube**, and normal messages. No super chats or subscriber events YET! ⚠️
+⚠️ It is also single-player only! But this will be changed sooner than Twitch support. ⚠️
 ## Installation
 
 1. Download the latest release [here](https://github.com/yuyuimoe/mc-streamerbot-integration/releases) (It's the file without `-dev`, `-sources` and `-dev-preshadow`)
