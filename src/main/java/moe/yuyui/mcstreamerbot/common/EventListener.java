@@ -18,6 +18,7 @@ public class EventListener extends Thread {
             this._websocketServer.run();
         } catch (NullPointerException e) {
             MCStreamerBot.LOG.error("Event Listener has failed. Websocket issue.", e);
+            MCStreamerBot.CHATLOG.error("Event Listener has failed. Websocket issue." + e);
         }
     }
 

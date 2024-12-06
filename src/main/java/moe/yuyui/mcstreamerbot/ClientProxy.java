@@ -1,10 +1,15 @@
 package moe.yuyui.mcstreamerbot;
 
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatStyle;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import moe.yuyui.mcstreamerbot.common.SimpleChatLogger;
 import moe.yuyui.mcstreamerbot.events.minecraft.OnWorldJoin;
 import moe.yuyui.mcstreamerbot.events.minecraft.OnWorldLeave;
 
@@ -21,6 +26,13 @@ public class ClientProxy extends CommonProxy {
         MinecraftForge.EVENT_BUS.register(new OnWorldJoin());
         MinecraftForge.EVENT_BUS.register(new OnWorldLeave());
         MCStreamerBot.LOG.info("Loaded MCStreamerBot");
+    }
+
+    public void postInit(FMLPostInitializationEvent event) {
+        MCStreamerBot.CHATLOG = new SimpleChatLogger(
+            new ChatComponentText("[MCStreamerBot] ").setChatStyle(
+                new ChatStyle().setColor(EnumChatFormatting.GRAY)
+                    .setBold(true)));
     }
 
 }

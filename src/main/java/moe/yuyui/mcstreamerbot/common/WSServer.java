@@ -51,13 +51,15 @@ public class WSServer extends WebSocketServer {
             return;
         }
         _authClients.add(conn);
-        MCStreamerBot.LOG.info("New client connection established.");
+        MCStreamerBot.LOG.info("New client connected: {}", conn.getRemoteSocketAddress());
+        MCStreamerBot.CHATLOG.info("New client connected.");
     }
 
     @Override
     public void onClose(WebSocket conn, int code, String reason, boolean remote) {
         _authClients.remove(conn);
-        MCStreamerBot.LOG.info("Client disconnected.");
+        MCStreamerBot.LOG.info("Client disconnected: {}", conn.getRemoteSocketAddress());
+        MCStreamerBot.CHATLOG.info("Client disconnected.");
     }
 
     @Override
@@ -114,7 +116,7 @@ public class WSServer extends WebSocketServer {
         }
         switch (MessageType.valueOf(payload.getType())) {
             case CHAT: {
-                OnChatMessage.sendMessage(payload.getParts(), payload.getTimestamp(), payload.getUser());
+                OnChatMessage.sendMessage(payload);
                 break;
             }
             case COMMAND: {
@@ -135,6 +137,7 @@ public class WSServer extends WebSocketServer {
     @Override
     public void onError(WebSocket conn, Exception ex) {
         MCStreamerBot.LOG.fatal("Websocket fatal error.", ex);
+        MCStreamerBot.CHATLOG.error("Websocket fatal error." + ex);
         conn.close();
     }
 
@@ -146,5 +149,6 @@ public class WSServer extends WebSocketServer {
                 .getHostString(),
             this.getAddress()
                 .getPort());
+        MCStreamerBot.CHATLOG.success("Websocket server started");
     }
 }
