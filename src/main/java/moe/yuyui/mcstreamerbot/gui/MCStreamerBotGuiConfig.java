@@ -40,6 +40,12 @@ public class MCStreamerBotGuiConfig extends GuiConfig {
         super.actionPerformed(button);
     }
 
+    @Override
+    public void onGuiClosed(){
+        super.onGuiClosed();
+        Config.synchronizeConfiguration();
+    }
+
     private static List<IConfigElement> getConfigElements() {
         Configuration config = Config.configuration;
         return config.getCategoryNames()

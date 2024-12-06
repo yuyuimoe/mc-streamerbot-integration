@@ -27,6 +27,7 @@ public class Config {
             "The authentication token for the websocket. Leave empty to disable authentication.");
 
         if (configuration.hasChanged()) {
+            MCStreamerBot.LOG.debug("Configuration saved.");
             configuration.save();
         }
     }
