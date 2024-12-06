@@ -8,7 +8,7 @@ public class Config {
     public static int portNumber = 8069;
     public static String ipAddress = "127.0.0.1";
     public static String authToken = "";
-    public static boolean addTimestamp = false;
+    public static boolean addTimestamp = true;
     public static Configuration configuration;
 
     public static void synchronizeConfiguration() {

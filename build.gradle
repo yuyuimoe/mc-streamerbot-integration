@@ -5,5 +5,5 @@ plugins {
 
 minecraft{
     injectedTags.put("MCVERSION", version)
-    injectedTags.put("CONFIG_VERSION", "1.0.0")
+    injectedTags.put("CONFIG_VERSION", "1.0.1")
 }
