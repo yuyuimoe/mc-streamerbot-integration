@@ -41,6 +41,14 @@ public class ChatMessageFactory {
                     messagePart.getEmoji()
                         .getEndIndex());
             }
+            if (Config.sanitizeFormatting) {
+                finalMessage.append(
+                    Normalizer.normalize(
+                        messagePart.getText()
+                            .replace("§", "\u180E"),
+                        Normalizer.Form.NFKC));
+                continue;
+            }
             finalMessage.append(Normalizer.normalize(messagePart.getText(), Normalizer.Form.NFKC));
         }
         return new ChatComponentText(

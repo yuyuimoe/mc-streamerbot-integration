@@ -9,11 +9,18 @@ public class Config {
     public static String ipAddress = "127.0.0.1";
     public static String authToken = "";
     public static boolean addTimestamp = true;
+    public static boolean sanitizeFormatting = true;
     public static Configuration configuration;
 
     public static void synchronizeConfiguration() {
         addTimestamp = configuration
             .getBoolean("Add timestamp", Configuration.CATEGORY_GENERAL, addTimestamp, "Add timestamp to messages");
+
+        sanitizeFormatting = configuration.getBoolean(
+            "Ignore formatting",
+            Configuration.CATEGORY_GENERAL,
+            sanitizeFormatting,
+            "Ignores chat formatting like §ethis§r and §sthis§r");
 
         configuration.addCustomCategoryComment(CATEGORY_WEBSOCKET, "Configuration for the websocket");
         portNumber = configuration

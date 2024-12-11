@@ -41,7 +41,7 @@ public class MCStreamerBotGuiConfig extends GuiConfig {
     }
 
     @Override
-    public void onGuiClosed(){
+    public void onGuiClosed() {
         super.onGuiClosed();
         Config.synchronizeConfiguration();
     }
