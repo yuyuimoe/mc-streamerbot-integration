@@ -45,7 +45,7 @@ public class ChatMessageFactory {
                 finalMessage.append(
                     Normalizer.normalize(
                         messagePart.getText()
-                            .replace("§", "\u180E"),
+                            .replace("§", "&"),
                         Normalizer.Form.NFKC));
                 continue;
             }

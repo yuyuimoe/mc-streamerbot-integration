@@ -25,7 +25,7 @@ public class EventListener extends Thread {
     public void end() throws InterruptedException {
         MCStreamerBot.LOG.info("Event listener stopping");
         this._websocketServer.getConnections()
-            .forEach((connection) -> connection.closeConnection(1, "Server closed"));
+            .forEach((connection) -> connection.closeConnection(1, "byebye girl"));
         this._websocketServer.stop();
         MCStreamerBot.LOG.info("Event listener stopped");
     }

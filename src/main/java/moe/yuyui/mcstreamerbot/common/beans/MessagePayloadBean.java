@@ -10,7 +10,7 @@ public class MessagePayloadBean {
     private final short _type;
     @SerializedName("BearerToken")
     private final String _token;
-    @SerializedName("User")
+    @SerializedName("UserInformation")
     private final UserBean _user;
     @SerializedName("Parts")
     private final List<MessageBean> _parts;
