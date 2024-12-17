@@ -12,7 +12,9 @@ import moe.yuyui.mcstreamerbot.MCStreamerBot;
 @Mixin(WorldClient.class)
 public class WorldClientMixin {
 
-    @Inject(method = "sendQuittingDisconnectingPacket", at = @At("HEAD"), remap = false)
+    @Inject(
+        method = "Lnet/minecraft/client/multiplayer/WorldClient;sendQuittingDisconnectingPacket()V",
+        at = @At("TAIL"))
     public void sendQuittingDisconnectingPacket(CallbackInfo callbackInfo) {
         if (MCStreamerBot.eventListener == null) {
             return;
