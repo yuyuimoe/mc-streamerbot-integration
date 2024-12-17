@@ -21,8 +21,7 @@ public class OnWorldJoin {
     @SideOnly(Side.CLIENT)
     @SuppressWarnings("unused")
     public void onEntityJoinWorld(EntityJoinWorldEvent event) {
-        if (event.entity == Minecraft.getMinecraft().thePlayer && Minecraft.getMinecraft()
-            .isIntegratedServerRunning() && event.world.isRemote) {
+        if (event.entity == Minecraft.getMinecraft().thePlayer && event.world.isRemote) {
             if (MCStreamerBot.eventListener != null) {
                 if (MCStreamerBot.eventListener.isAlive()) {
                     return;
