@@ -11,7 +11,6 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import moe.yuyui.mcstreamerbot.common.SimpleChatLogger;
 import moe.yuyui.mcstreamerbot.events.minecraft.OnWorldJoin;
-import moe.yuyui.mcstreamerbot.events.minecraft.OnWorldLeave;
 
 public class ClientProxy extends CommonProxy {
 
@@ -24,7 +23,6 @@ public class ClientProxy extends CommonProxy {
 
     public void init(FMLInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(new OnWorldJoin());
-        MinecraftForge.EVENT_BUS.register(new OnWorldLeave());
         MCStreamerBot.LOG.info("Loaded MCStreamerBot");
     }
 

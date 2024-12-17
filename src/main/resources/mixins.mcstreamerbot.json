@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "moe.yuyui.mcstreamerbot.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "mcstreamerbot.refmap.json",
+  "mixins": [
+    "WorldClientMixin"
+  ],
+  "client": [],
+  "minVersion": "0.8.5"
+}
